@@ -1,9 +1,4 @@
 import React from 'react'
+import Timer from 'App/timer/Timer'
 
-function App() {
-  return (
-    <h1>Countdown Timer</h1>
-  )
-}
-
-export default App;
+export default () => ( <Timer /> )
