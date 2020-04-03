@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import InputNumber from 'App/components/InputNumber'
 
 const TimerManager = React.memo(function TimerManager(props){
   const [mins, setMins] = useState(0);
-  const [secs, setSecs] = useState(4);
+  const [secs, setSecs] = useState(2);
 
   return (
-  <div>
-    <InputNumber placeholder="mins" val={mins} min={0} onChange={setMins} />
+  <div className="mb">
+    <InputNumber placeholder="mins" default={mins} min={0} onChange={setMins}  readOnly={props.isStarted}/> <span className="mr">mins</span>
     
-    <InputNumber placeholder="secs" val={secs} min={0} max={60} onChange={setSecs}/>
+    <InputNumber placeholder="secs" default={secs} min={0} max={60} onChange={setSecs} readOnly={props.isStarted}/> <span className="mr">secs</span>
 
     { !props.isStarted && 
-      <button disabled={mins == 0 && secs == 0} onClick={() => props.onStart(mins, secs)}> Start </button>
+      <button disabled={!mins && !secs} onClick={() => props.onStart(mins, secs)}> Start </button>
     }
     {
       props.isStarted &&

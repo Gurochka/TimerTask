@@ -1,6 +1,6 @@
 import React from 'react'
 import TimerManager from 'App/timer/TimerManager'
-import RunningTimer from 'App/timer/RunningTimer'
+import RunningTimer from 'App/timer/RunningTimer/RunningTimer'
 import TimerHistory from 'App/timer/TimerHistory'
 
 export default class Timer extends React.Component {
@@ -27,7 +27,7 @@ export default class Timer extends React.Component {
       return;
     }
     if (this.state.isTimerPaused){
-      this.setState({timer: {...this.state.timer, finished_at: new Date(this.state.timer.finished_at.getTime() + this.state.timer.initial_time*1000) }})
+      this.setState({timer: {...this.state.timer, finished_at: new Date(this.state.timer.finished_at.getTime() + this.state.timer.remaining_time*1000) }})
     } else {
       this.setState({ timer: {...this.state.timer, remaining_time: this.state.timer.remaining_time - 1} })
     }
@@ -57,14 +57,15 @@ export default class Timer extends React.Component {
 
   render(){
     const { timer, timers } = this.state
+    const isStarted = !!this.timerId
 
     return (
       <div className="container">
         <h1>Countdown Timer</h1>
         
-        <TimerManager isStarted={!!this.timerId} isPaused={this.state.isTimerPaused} onStart={this.onStartTimer} onToggle={this.onToggleTimer} />
+        <TimerManager isStarted={isStarted} isPaused={this.state.isTimerPaused} onStart={this.onStartTimer} onToggle={this.onToggleTimer} />
         
-        { !!this.timerId && 
+        { isStarted && 
           <RunningTimer timer={ timer }/>
         }
         

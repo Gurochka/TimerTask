@@ -1,0 +1,18 @@
+.table{
+  text-align: left;
+  border-spacing: 0;
+  border: 1px solid var(--secondary-color);
+}
+
+.table th{
+  padding: 1rem;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.table td{
+  padding: 1rem;
+}
+.table tbody tr:nth-child(even){
+  background-color: var(--secondary-color);
+}

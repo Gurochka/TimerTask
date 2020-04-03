@@ -1,0 +1,15 @@
+.progressbar .progressbar-line{
+  background-color: var(--secondary-color);
+  margin: 1rem 0;
+  height: 2px;
+}
+.progressbar .progressbar-line div{
+  background-color: var(--primary-color);
+  height: 100%;
+}
+.progressbar label{
+  display: block;
+  color: var(--primary-color);
+  text-align: center;
+  font-size: 1.5em;
+}

@@ -1,25 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default class InputNumber extends React.Component {
-  state = {
-    value: this.props.val
-  }
+export default function InputNumber(props){
+  const [value, setValue] = useState(props.default);
 
-  onChangeHandler = e => {
-    let value = e.target.value;
+  let onChangeHandler = e => {
+    let newValue = e.target.value;
 
-    if (value === '') value = '0'
+    if (!newValue) newValue = '0'
 
-    if (value.length > 0 && /^[0-9]*$/g.test(value)){
-      value = parseInt(value, 10);
-      if ((this.props.min && value < this.props.min) || (this.props.max && value > this.props.max )) return;
-      this.setState({ value }, () => { if (this.props.onChange) this.props.onChange(value) })
+    if (newValue.length > 0 && /^[0-9]*$/g.test(newValue)){
+      newValue = parseInt(newValue, 10);
+      if ((props.min && newValue < props.min) || (props.max && newValue > props.max )) return;
+      
+      setValue(newValue);
+      if (props.onChange) props.onChange(newValue)
     }
   }
 
-  render(){
-    return(
-      <input type="text" placeholder={this.props.placeholder} value={this.state.value} onChange={this.onChangeHandler} readOnly={this.props.readOnly}/>
-      )
-  }
+  return(
+    <input type="text" {...props} value={value} onChange={onChangeHandler} />
+  )
 }
